@@ -50,12 +50,13 @@ public class CMovieServlet extends HttpServlet {
 		String movieCasts = request.getParameter("movieCasts");
 		String movieDuration = request.getParameter("movieDuration");
 		String movieDateRelease = request.getParameter("movieDateRelease");
+		String movieImage = request.getParameter("movieImage");
 		try {
 			 Class.forName("com.mysql.jdbc.Driver");
 			 Connection con = DriverManager.getConnection(
 			 "jdbc:mysql://localhost:3306/movietoday", "root", "password");
 	
-		PreparedStatement ps = con.prepareStatement("insert into movie values(?,?,?,?,?,?,?)");
+		PreparedStatement ps = con.prepareStatement("insert into movie values(?,?,?,?,?,?,?,?)");
 		 ps.setInt(1, 0);
 		 ps.setString(2, movieName);
 		 ps.setString(3, movieGenre);
@@ -63,6 +64,7 @@ public class CMovieServlet extends HttpServlet {
 		 ps.setString(5, movieCasts);
 		 ps.setString(6, movieDuration);
 		 ps.setString(7, movieDateRelease);
+		 ps.setString(8, movieImage);
 		 int i = ps.executeUpdate();
 		 if (i > 0){
 			 PrintWriter writer = response.getWriter();

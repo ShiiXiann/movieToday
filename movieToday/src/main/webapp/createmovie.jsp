@@ -45,6 +45,8 @@
 				type="text" name="movieDuration" size="20"><br> 
 			Enter movie date release: <input type="text" name="movieDateRelease"
 				size="20"><br>
+			Enter movie image link: <input type="text" name="movieImage"
+				size="20"><br>
 			<!-- Implement submit button with type = submit to perform the request when clicked -->
 			<div class="text-center">
 			<input type="submit" value="Add movie" class="bg-primary text-white"/>

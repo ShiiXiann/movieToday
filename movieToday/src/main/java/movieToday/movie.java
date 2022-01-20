@@ -8,5 +8,6 @@ public class movie {
 	private String movieCasts;
 	private float movieDuration;
 	private String movieDateRelease;
+	private String movieImage;
 
 }
