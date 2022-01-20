@@ -19,8 +19,31 @@
 			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/movie.jsp">Home</a></li>
 			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/createmovie.jsp">
 					Add Movies</a></li>
-			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
+
+			<%-- <li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
 			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/register.jsp">Register</a></li>
+			
+			<li class="nav-item text-center"><a class="nav-link" href="#">Profile</a>
+			</li>
+
+			<li class="nav-item text-center"><a class="nav-link" href="#">Favourite</a>
+			</li>
+			<li class="nav-item text-center"><a class="nav-link" href="#">Log
+					out</a></li> --%>
+
+			<%
+			String username = (String) session.getAttribute("user");
+			if (username == null) {
+			%>
+			<li class="nav-item text-center"><a class="nav-link"
+				href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
+			<li class="nav-item text-center"><a class="nav-link"
+				href="<%=request.getContextPath()%>/register.jsp">Register</a></li>
+
+
+			<%
+			} else {
+			%>
 			<li class="nav-item text-center"><a class="nav-link" href="#">Profile</a>
 			</li>
 
@@ -28,6 +51,9 @@
 			</li>
 			<li class="nav-item text-center"><a class="nav-link" href="#">Log
 					out</a></li>
+			<%
+			}
+			%>
 
 		</ul>
 	</nav>
