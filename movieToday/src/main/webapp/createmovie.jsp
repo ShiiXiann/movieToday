@@ -40,7 +40,7 @@
 			Enter your description: <input type="text" name="movieDescription"
 				size="20"><br>
 			Enter movie casts: <input type="text"
-				name="movieCast" size="20"><br>
+				name="movieCasts" size="20"><br>
 			Enter movie duration: <input
 				type="text" name="movieDuration" size="20"><br> 
 			Enter movie date release: <input type="text" name="movieDateRelease"

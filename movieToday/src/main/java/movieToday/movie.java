@@ -1,7 +1,7 @@
 package movieToday;
 
 public class movie {
-	private int movieId;
+	private int id;
 	private String movieName;
 	private String movieGenre;
 	private String movieDescription;
