@@ -15,9 +15,10 @@
 	<nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
 		<ul class="navbar-nav mx-auto">
 
-			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/movie.jsp">Home</a></li>
-			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/createmovie.jsp">
-					Add Movies</a></li>
+			<li class="nav-item text-center"><a class="nav-link"
+				href="<%=request.getContextPath()%>/movie.jsp">Home</a></li>
+			<li class="nav-item text-center"><a class="nav-link"
+				href="<%=request.getContextPath()%>/createmovie.jsp"> Add Movies</a></li>
 			<%-- <li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
 			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/register.jsp">Register</a></li>
 			<li class="nav-item text-center"><a class="nav-link" href="#">Profile</a>
@@ -45,19 +46,24 @@
 
 			<li class="nav-item text-center"><a class="nav-link" href="#">Favourite</a>
 			</li>
-			<li class="nav-item text-center"><a class="nav-link" href="UserServlet/logout">Log
-					out</a></li>
+			<li class="nav-item text-center"><a class="nav-link"
+				href="UserServlet/logout">Log out</a></li>
 			<%
 			}
 			%>
 
 		</ul>
 	</nav>
-	<h4 style="text-align: center;">Welcome to your profile page! ${username}</h4>
+	<h4 style="text-align: center;">Welcome to your profile page!
+		${username}</h4>
 	<%
 	if (session.getAttribute("username") == null)
-		response.sendRedirect("http://localhost:8082/movieToday/login.jsp");
+		response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
 	%>
+
+
+				
+
 
 </body>
 </html>
