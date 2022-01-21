@@ -73,7 +73,7 @@ public class RegisterServlet extends HttpServlet {
 			if (i > 0) {
 				PrintWriter writer = response.getWriter();
 				writer.println("<h1>" + "You have successfully registered an account!" + "</h1>");
-				response.sendRedirect("http://localhost:8082/movieToday/login.jsp");
+				response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
 				writer.close();
 			}
 		}

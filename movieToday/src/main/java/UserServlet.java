@@ -43,11 +43,10 @@ public class UserServlet extends HttpServlet {
 
 	// Step 2: Prepare list of SQL prepared statements to perform CRUD to our
 	// database
-
-	private static final String SELECT_USER_BY_ID = "select name,password,email,phoneNumber from user where id =?";
-	private static final String SELECT_ALL_USERS = "select * from user ";
-	private static final String DELETE_USERS_SQL = "delete from user where name = ?;";
-	private static final String UPDATE_USERS_SQL = "update user set name = ?,password= ?,email =?,language =? where name = ?;";
+	private static final String SELECT_ALL_USERS = "select * from user";
+	private static final String SELECT_USER_BY_ID = "select id, username, password, email, phoneNumber from user where id =?";
+	private static final String DELETE_USERS_SQL = "delete from user where id = ?;";
+	private static final String UPDATE_USERS_SQL = "update user set username = ?,password= ?,email =?,phoneNumber =? where id = ?;";
 
 	// For login SQL statement
 	private static final String LOGIN_USER_SQL = "SELECT * FROM user WHERE username = ? and password = ?";
@@ -87,12 +86,18 @@ public class UserServlet extends HttpServlet {
 			case "/UserServlet/logout":
 				loginUsers(request, response);
 				break;
+			
+			
 			}
+				
+			
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
 
 	}
+
+
 
 
 	private void loginUsers (HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException 
@@ -115,16 +120,17 @@ public class UserServlet extends HttpServlet {
 						
 						session.setAttribute("id", uid);
 						session.setAttribute("username", username);
+						
 						session.setAttribute("isLoggedIn", true);
 						System.out.println(session.getAttribute("id"));
 						System.out.println(session.getAttribute("username"));
-						response.sendRedirect("http://localhost:8082/movieToday/profile.jsp");
+						response.sendRedirect("http://localhost:8080/movieToday/profile.jsp");
 				}
 			}
 			else {
-				request.setAttribute("errorMessage", "Invalid user or password");
+				
 				System.out.println("Wrong username or password");
-				response.sendRedirect("http://localhost:8082/movieToday/login.jsp");
+				response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
 			}
 		}
 		
@@ -141,11 +147,12 @@ public class UserServlet extends HttpServlet {
 		session.removeAttribute("username");
 		session.invalidate();
 		System.out.println("You are logged out");
-		response.sendRedirect("http://localhost:8082/movieToday/login.jsp");
+		response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
 		
 	}
 	
-	
+
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
