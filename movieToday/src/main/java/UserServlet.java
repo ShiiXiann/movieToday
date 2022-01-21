@@ -84,7 +84,7 @@ public class UserServlet extends HttpServlet {
 				loginUsers(request, response);
 				break;
 			case "/UserServlet/logout":
-				loginUsers(request, response);
+				LogOutUser(request, response);
 				break;
 			
 			
