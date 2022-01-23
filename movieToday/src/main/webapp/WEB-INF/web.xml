@@ -19,7 +19,10 @@
 		<servlet-name>UserServlet</servlet-name>
 		<url-pattern>/UserServlet/login</url-pattern>
 		<url-pattern>/UserServlet/logout</url-pattern>
-		
+		<url-pattern>/profile</url-pattern>
+		<url-pattern>/edit</url-pattern>
+		<url-pattern>/update</url-pattern>
+		<url-pattern>/delete</url-pattern>
 	</servlet-mapping>
 
 </web-app>

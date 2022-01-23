@@ -44,9 +44,9 @@ public class UserServlet extends HttpServlet {
 	// Step 2: Prepare list of SQL prepared statements to perform CRUD to our
 	// database
 	private static final String SELECT_ALL_USERS = "select * from user";
-	private static final String SELECT_USER_BY_ID = "select id, username, password, email, phoneNumber from user where id =?";
+	private static final String SELECT_USER_BY_ID = "select * from user where id = ?";
 	private static final String DELETE_USERS_SQL = "delete from user where id = ?;";
-	private static final String UPDATE_USERS_SQL = "update user set username = ?,password= ?,email =?,phoneNumber =? where id = ?;";
+	private static final String UPDATE_USERS_SQL = "update user set username = ?, password = ?, email = ?, phoneNumber = ? where id = ?;";
 
 	// For login SQL statement
 	private static final String LOGIN_USER_SQL = "SELECT * FROM user WHERE username = ? and password = ?";
@@ -79,86 +79,204 @@ public class UserServlet extends HttpServlet {
 		String action = request.getServletPath();
 		try {
 			switch (action) {
-		
+
 			case "/UserServlet/login":
 				loginUsers(request, response);
 				break;
 			case "/UserServlet/logout":
-				loginUsers(request, response);
+				LogOutUser(request, response);
 				break;
-			
-			
+			case "/profile":
+				System.out.println("testing");
+				ProfileDetails(request, response);
+				break;
+			case "/edit":
+				showEditForm(request, response);
+				break;
+			case "/update":
+				updateUser(request, response);
+				break;
+			case "/delete":
+				deleteUser(request, response);
+				break;
+
 			}
-				
-			
+
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
 
 	}
 
-
-
-
-	private void loginUsers (HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException 
-	{
+	// For Login
+	private void loginUsers(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
 		HttpSession session = request.getSession();
 		PrintWriter out = response.getWriter();
 		String enteredUsername = request.getParameter("username");
 		String enteredPassword = request.getParameter("password");
-		
+
 		try (Connection connection = getConnection();
-				PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_USER_SQL);){
+				PreparedStatement preparedStatement = connection.prepareStatement(LOGIN_USER_SQL);) {
 			preparedStatement.setString(1, enteredUsername);
 			preparedStatement.setString(2, enteredPassword);
 			ResultSet rs = preparedStatement.executeQuery();
 			if (rs.next()) {
-				if (rs.getString("username").equals(enteredUsername) && (rs.getString("password").equals(enteredPassword))) {
-					
-						int uid = rs.getInt("id");
-						String username = rs.getString("username");
-						
-						session.setAttribute("id", uid);
-						session.setAttribute("username", username);
-						
-						session.setAttribute("isLoggedIn", true);
-						System.out.println(session.getAttribute("id"));
-						System.out.println(session.getAttribute("username"));
-						response.sendRedirect("http://localhost:8080/movieToday/profile.jsp");
+				if (rs.getString("username").equals(enteredUsername)
+						&& (rs.getString("password").equals(enteredPassword))) {
+					int uid = rs.getInt("id");
+					String username = rs.getString("username");
+					// setAttribute() is to save an object in session by assigning a unique string
+					// to the object.
+					session.setAttribute("id", uid);
+					session.setAttribute("username", username);
+					session.setAttribute("isLoggedIn", true);
+					// getAttribute() the object stored by setAttribute method is fetched from
+					// session using getAttribute method
+					session.getAttribute("id");
+					session.getAttribute("username");
+					session.getAttribute("isLoggedIn");
+					System.out.println(session.getAttribute("id"));
+					System.out.println(session.getAttribute("username"));
+					response.sendRedirect("http://localhost:8080/movieToday/profile?id=" + uid);
 				}
-			}
-			else {
-				
+			} else {
+
 				System.out.println("Wrong username or password");
 				response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
 			}
 		}
-		
+
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-				
+
 	}
-	
-	private void LogOutUser (HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException, ServletException 
-	{
+
+	// For Logging Out
+	private void LogOutUser(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
 		HttpSession session = request.getSession();
 		session.removeAttribute("username");
 		session.invalidate();
 		System.out.println("You are logged out");
 		response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
-		
+
+	}
+
+	// Display current logged in user's profile
+	private void ProfileDetails(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		PrintWriter out = response.getWriter();
+		List<User> users = new ArrayList<>();
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+			int uid = Integer.parseInt(request.getParameter("id"));
+			preparedStatement.setInt(1, uid);
+			ResultSet rs = preparedStatement.executeQuery();
+			System.out.println("The id for this user profile is: " + uid);
+			while (rs.next()) {
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phoneNumber");
+				users.add(new User(uid, username, password, email, phoneNumber));
+				request.setAttribute("ProfileDetails", users);
+				request.getRequestDispatcher("/profile.jsp").forward(request, response);
+			}
+
+		}
+
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
+	// Method 1: showEditForm
+	// method to get parameter, query database for existing user data and redirect
+	// to user edit page
+	private void showEditForm(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		// get parameter passed in the URL
+		int uid = Integer.parseInt(request.getParameter("id"));
+		User existingUser = new User(uid,"", "", "", "");
+		// Step 1: Establishing a Connection
+		try (Connection connection = getConnection();
+				// Step 2:Create a statement using connection object
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_USER_BY_ID);) {
+			preparedStatement.setInt(1, uid);
+			// Step 3: Execute the query or update query
+			ResultSet rs = preparedStatement.executeQuery();
+			// Step 4: Process the ResultSet object
+			while (rs.next()) {
+				uid = rs.getInt("id");
+				String username = rs.getString("username");
+				String password = rs.getString("password");
+				String email = rs.getString("email");
+				String phoneNumber = rs.getString("phoneNumber");
+				existingUser = new User(uid, username, password, email, phoneNumber);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		// Step 5: Set existingUser to request and serve up the userEdit form
+		request.setAttribute("user", existingUser);
+		request.getRequestDispatcher("/userEdit.jsp").forward(request, response);
+	}
+	
+	
+	// Method 2: updateUser
+		// method to update the user table base on the form data
+	// Method 2: updateUser
+		// method to update the user table base on the form data
+		private void updateUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+			// Step 1: Retrieve value from the request
+			int oriId = Integer.parseInt(request.getParameter("id"));
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			String email = request.getParameter("email");
+			String phoneNumber = request.getParameter("phoneNumber");
 
+			// Step 2: Attempt connection with database and execute update user SQL query
+			try (Connection connection = getConnection();
+					PreparedStatement statement = connection.prepareStatement(UPDATE_USERS_SQL);) {
+				statement.setString(1, username);
+				statement.setString(2, password);
+				statement.setString(3, email);
+				statement.setString(4, phoneNumber);
+				statement.setInt(5, oriId);
+				System.out.println(username);
+				int i = statement.executeUpdate();
+			}
+			// Step 3: redirect back to UserServlet (note: remember to change the url to
+			// your project name)
+			// made changes here
+			response.sendRedirect("http://localhost:8080/movieToday/profile?id=" + oriId);
+		}
+		
 
+		// Method 3: deleteUser
+		// method to delete user
+		private void deleteUser(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
+			// Step 1: Retrieve value from the request
+			int uid = Integer.parseInt(request.getParameter("id"));
+			// Step 2: Attempt connection with database and execute delete user SQL query
+			try (Connection connection = getConnection();
+					PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
+				statement.setInt(1, uid);
+				int i = statement.executeUpdate();
+			}
+			// Step 3: redirect back to UserServlet dashboard (note: remember to change the
+			// url to your project name)
+			System.out.println("Account has been deleted");
+			response.sendRedirect("http://localhost:8080/movieToday/register.jsp");
+		}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
 	 *      response)
 	 */
-	// For login
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
