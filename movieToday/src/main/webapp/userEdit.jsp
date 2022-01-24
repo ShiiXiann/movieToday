@@ -11,6 +11,8 @@
 	crossorigin="anonymous">
 </head>
 <body>
+	<!-- Navigation Bar -->
+	<jsp:include page="navbar.jsp" />
 	<div class="container col-md-6">
 		<div class="card">
 			<div class="card-body">
