@@ -87,7 +87,6 @@ public class UserServlet extends HttpServlet {
 				LogOutUser(request, response);
 				break;
 			case "/profile":
-				System.out.println("testing");
 				ProfileDetails(request, response);
 				break;
 			case "/edit":
@@ -266,6 +265,10 @@ public class UserServlet extends HttpServlet {
 					PreparedStatement statement = connection.prepareStatement(DELETE_USERS_SQL);) {
 				statement.setInt(1, uid);
 				int i = statement.executeUpdate();
+				// remove session storage when deleting account
+				HttpSession session = request.getSession();
+				session.removeAttribute("username");
+				session.invalidate();
 			}
 			// Step 3: redirect back to UserServlet dashboard (note: remember to change the
 			// url to your project name)
