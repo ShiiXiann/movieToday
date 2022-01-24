@@ -14,7 +14,7 @@
 <body>
 <!-- Navigation Bar -->
 <jsp:include page="navbar.jsp" />
-	
+  
 	<h4 style="text-align: center;">Welcome, ${username} !</h4>
 	<%
 	if (session.getAttribute("id") == null)
