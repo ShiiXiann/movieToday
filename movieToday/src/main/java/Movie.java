@@ -1,7 +1,5 @@
-package movieToday;
 
-public class movie {
-
+public class Movie {
 	protected int id;
 	protected String movieName;
 	protected String movieGenre;
@@ -11,7 +9,7 @@ public class movie {
 	protected String movieDateRelease;
 	protected String movieImage;
 	
-	public movie(int id, String movieName, String movieGenre, String movieDescription, String movieCasts, float movieDuration, String movieDateRelease, String movieImage) {
+	public Movie(int id, String movieName, String movieGenre, String movieDescription, String movieCasts, float movieDuration, String movieDateRelease, String movieImage) {
 		super();
 		this.id = id;
 		this.movieName = movieName;
@@ -86,6 +84,5 @@ public class movie {
 	public void setMovieImage(String movieImage) {
 		this.movieImage = movieImage;
 	}
-
 
 }

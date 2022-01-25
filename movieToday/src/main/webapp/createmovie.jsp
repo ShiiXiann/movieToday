@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
@@ -12,28 +13,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
-		<ul class="navbar-nav mx-auto">
+	<jsp:include page="navbar.jsp" />
 
-			<li class="nav-item text-center"><a class="nav-link"
-				href="<%=request.getContextPath()%>/movie.jsp">Home</a></li>
-			<li class="nav-item text-center"><a class="nav-link"
-				href="<%=request.getContextPath()%>/createmovie"> Add Movies</a></li>
-			<li class="nav-item text-center"><a class="nav-link"
-				href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
-			<li class="nav-item text-center"><a class="nav-link"
-				href="<%=request.getContextPath()%>/register.jsp">Register</a></li>
-			<li class="nav-item text-center"><a class="nav-link" href="#">Profile</a>
-			</li>
-
-			<li class="nav-item text-center"><a class="nav-link"
-				href="<%=request.getContextPath()%>/favourite.jsp">Favourite</a></li>
-				
-			<li class="nav-item text-center"><a class="nav-link" href="#">Log
-					out</a></li>
-
-		</ul>
-	</nav>
 	<div class="bg-dark text-white">
 		<form action="CMovieServlet" method="post">
 			Enter movie name: <input type="text" name="movieName" size="20"><br>
