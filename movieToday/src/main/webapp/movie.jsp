@@ -17,6 +17,7 @@
 	<div class="col text-center">
 		<a href="<%=request.getContextPath()%>/createmovie.jsp"
 					class="btn btnsuccess">Add New Movies</a>
+
 	</div>
 
 	<div class="container-fluid p-5 my-3 bg-dark text-white">
@@ -33,6 +34,7 @@
 			</div>
 		</div>
 	</div>
+
 
 
 </body>

@@ -1,6 +1,7 @@
 package movieToday;
 
 public class movie {
+
 	protected int id;
 	protected String movieName;
 	protected String movieGenre;
@@ -85,5 +86,6 @@ public class movie {
 	public void setMovieImage(String movieImage) {
 		this.movieImage = movieImage;
 	}
+
 
 }

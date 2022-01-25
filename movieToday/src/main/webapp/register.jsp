@@ -13,24 +13,8 @@
 </head>
 <body>
 	<!-- Navigation Bar -->
-	<nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
-		<ul class="navbar-nav mx-auto">
-
-			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/movie.jsp">Home</a></li>
-			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/createmovie.jsp">
-					Add Movies</a></li>
-			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/login.jsp">Login</a></li>
-			<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/register.jsp">Register</a></li>
-			<li class="nav-item text-center"><a class="nav-link" href="#">Profile</a>
-			</li>
-
-			<li class="nav-item text-center"><a class="nav-link" href="#">Favourite</a>
-			</li>
-			<li class="nav-item text-center"><a class="nav-link" href="#">Log
-					out</a></li>
-
-		</ul>
-	</nav>
+	<jsp:include page="navbar.jsp" />
+	
 	<!-- Starting of Register Form -->
 	<div class="container h-100">
 		<div class="row h-100 justify-content-center align-items-center">

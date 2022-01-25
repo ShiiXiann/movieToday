@@ -14,21 +14,21 @@
 </head>
 <body>
 	<jsp:include page="navbar.jsp" />
+
 	<div class="bg-dark text-white">
 		<form action="CMovieServlet" method="post">
 			Enter movie name: <input type="text" name="movieName" size="20"><br>
 			Enter movie genre: <input type="text" name="movieGenre" size="20"><br>
 			Enter your description: <input type="text" name="movieDescription"
-				size="20"><br>
-			Enter movie casts: <input type="text"
-				name="movieCasts" size="20"><br>
-			Enter movie duration: <input
-				type="text" name="movieDuration" size="20"><br> 
+				size="20"><br> Enter movie casts: <input type="text"
+				name="movieCasts" size="20"><br> Enter movie duration:
+			<input type="text" name="movieDuration" size="20"><br>
 			Enter movie date release: <input type="text" name="movieDateRelease"
-				size="20"><br>
+				size="20"><br> Enter movie image link: <input
+				type="text" name="movieImage" size="20"><br>
 			<!-- Implement submit button with type = submit to perform the request when clicked -->
 			<div class="text-center">
-			<input type="submit" value="Add movie" class="bg-primary text-white"/>
+				<input type="submit" value="Add movie" class="bg-primary text-white" />
 			</div>
 		</form>
 	</div>
