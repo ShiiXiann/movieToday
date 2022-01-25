@@ -23,7 +23,6 @@
 	<div class="container-fluid p-5 my-3 bg-dark text-white">
 		<div>
 			<h3>Movies</h3>
-			<!-- <c:forEach var="movie" items="${listMovies}"> -->
 			<div class="card" style="width: 18rem;">
 				<div class="card-body">
 					<img class="card-img-top" src="..." alt="Card image cap">
