@@ -23,6 +23,7 @@
 
 	<servlet-mapping>
 		<servlet-name>UserServlet</servlet-name>
+		<!-- User-->
 		<url-pattern>/UserServlet/login</url-pattern>
 		<url-pattern>/UserServlet/logout</url-pattern>
 		<url-pattern>/profile</url-pattern>
@@ -31,12 +32,27 @@
 		<url-pattern>/delete</url-pattern>
 	</servlet-mapping>
 
+
+	<!--Review-->
+	<servlet>
+		<servlet-name>ReviewServlet</servlet-name>
+		<servlet-class>ReviewServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ReviewServlet</servlet-name>
+		<url-pattern>/reviews</url-pattern>
+		<url-pattern>/postReview</url-pattern>
+		<url-pattern>/edits</url-pattern>
+		<url-pattern>/updatesreviews</url-pattern>
+		<url-pattern>/deletesreviews</url-pattern>
+
 	<servlet-mapping>
 		<servlet-name>MovieServlet</servlet-name>
 		<url-pattern>/MovieServlet/display</url-pattern>
 		<url-pattern>/MovieServlet/editMovie</url-pattern>
 		<url-pattern>/MovieServlet/updateMovie</url-pattern>
 		<url-pattern>/MovieServlet/deleteMovie</url-pattern>
+
 	</servlet-mapping>
 
 
