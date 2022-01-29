@@ -15,7 +15,7 @@
 		<servlet-class>UserServlet</servlet-class>
 	</servlet>
 
-<servlet>
+    <servlet>
 		<servlet-name>MovieServlet</servlet-name>
 		<servlet-class>MovieServlet</servlet-class>
 	</servlet>
@@ -34,7 +34,9 @@
 	<servlet-mapping>
 		<servlet-name>MovieServlet</servlet-name>
 		<url-pattern>/MovieServlet/display</url-pattern>
-
+		<url-pattern>/MovieServlet/editMovie</url-pattern>
+		<url-pattern>/MovieServlet/updateMovie</url-pattern>
+		<url-pattern>/MovieServlet/deleteMovie</url-pattern>
 	</servlet-mapping>
 
 
