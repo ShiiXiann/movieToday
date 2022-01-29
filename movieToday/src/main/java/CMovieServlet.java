@@ -67,10 +67,11 @@ public class CMovieServlet extends HttpServlet {
 		 ps.setString(8, movieImage);
 		 int i = ps.executeUpdate();
 		 if (i > 0){
-			 PrintWriter writer = response.getWriter();
-			 writer.println("<h1>" + "You have successfully added a movie." +
-			 "</h1>");
-			 writer.close();
+//			 PrintWriter writer = response.getWriter();
+//			 writer.println("<h1>" + "You have successfully added a movie." +
+//			 "</h1>");
+//			 writer.close();
+			 response.sendRedirect("http://localhost:8080/movieToday/movie.jsp");
 			 }
 		 }
 		 

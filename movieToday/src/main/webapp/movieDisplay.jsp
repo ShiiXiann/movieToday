@@ -51,10 +51,10 @@
 							<td><c:out value="${movie.movieImage}" /></td>
 <!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 
-							<td><a href="edit?name=<c:out value='${movie.movieName}'/>">Edit</a>
+							<td><a href="/movieToday/MovieServlet/editMovie?id=<c:out value='${movie.id}'/>">Edit</a>
 
-								&nbsp;&nbsp;&nbsp;&nbsp; <a
-								href="delete?name=<c:out value='${movie.movieName}' />">Delete</a></td>
+								&nbsp;&nbsp;&nbsp;&nbsp; 
+							 <a href="deleteMovie?id=<c:out value='${movie.id}' />">Delete</a></td>
 
 						</tr>
 					</c:forEach>

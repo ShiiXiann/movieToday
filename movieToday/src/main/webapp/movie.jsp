@@ -27,8 +27,8 @@
 				<div class="card-body">
 					<img class="card-img-top" src="..." alt="Card image cap">
 					<h5 class="card-title text-dark">Movie Name</h5>
-					<a href="<%=request.getContextPath()%>/movieDisplay.jsp"
-						class="card-link">Reviews</a>
+					<a href="<%=request.getContextPath()%>/MovieServlet/display"
+						class="card-link">Manage Movie</a>
 				</div>
 			</div>
 		</div>
