@@ -45,7 +45,7 @@
 		<url-pattern>/edits</url-pattern>
 		<url-pattern>/updatesreviews</url-pattern>
 		<url-pattern>/deletesreviews</url-pattern>
-
+</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>MovieServlet</servlet-name>
 		<url-pattern>/MovieServlet/display</url-pattern>
