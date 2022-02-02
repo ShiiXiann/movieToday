@@ -80,6 +80,12 @@ public class MovieServlet extends HttpServlet {
 				System.out.println("testing");
 				listMovies(request, response);
 				break;
+				
+			case "/MovieServlet/home":
+				System.out.println("testing 6");
+				homeMovies(request, response);
+				break;
+
 
 			case "/MovieServlet/deleteMovie":
 				System.out.println("testing delete");
@@ -196,6 +202,37 @@ public class MovieServlet extends HttpServlet {
 		request.getRequestDispatcher("/movieDisplay.jsp").forward(request, response);
 
 	}
+	
+	private void homeMovies(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		List<Movie> movies = new ArrayList<>();
+		System.out.println("testing 2");
+		try (Connection connection = getConnection();
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_MOVIES);) {
+//			int mid = Integer.parseInt(request.getParameter("id"));
+//			preparedStatement.setInt(1, mid);
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				int mid = rs.getInt("id");
+				String movieName = rs.getString("movieName");
+				String movieGenre = rs.getString("movieGenre");
+				String movieDescription = rs.getString("movieDescription");
+				String movieCasts = rs.getString("movieCasts");
+				int movieDuration = rs.getInt("movieDuration");
+				String movieDateRelease = rs.getString("movieDateRelease");
+				String movieImage = rs.getString("movieImage");
+				movies.add(new Movie(mid, movieName, movieGenre, movieDescription, movieCasts, movieDuration,
+						movieDateRelease, movieImage));
+				System.out.println(movies);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
+		request.setAttribute("homeMovies", movies);
+		request.getRequestDispatcher("/movie.jsp").forward(request, response);
+
+	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
