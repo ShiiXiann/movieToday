@@ -1,43 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" version="3.1">
-	<display-name>movieToday</display-name>
-	<welcome-file-list>
-		<welcome-file>index.html</welcome-file>
-		<welcome-file>index.htm</welcome-file>
-		<welcome-file>index.jsp</welcome-file>
-		<welcome-file>default.html</welcome-file>
-		<welcome-file>default.htm</welcome-file>
-		<welcome-file>default.jsp</welcome-file>
-	</welcome-file-list>
-
-	<servlet>
-		<servlet-name>UserServlet</servlet-name>
-		<servlet-class>UserServlet</servlet-class>
-	</servlet>
+    <display-name>movieToday</display-name>
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
 
     <servlet>
-		<servlet-name>MovieServlet</servlet-name>
-		<servlet-class>MovieServlet</servlet-class>
-	</servlet>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>UserServlet</servlet-class>
+    </servlet>
+
+    <servlet>
+        <servlet-name>MovieServlet</servlet-name>
+        <servlet-class>MovieServlet</servlet-class>
+    </servlet>
 
 
-	<servlet-mapping>
-		<servlet-name>UserServlet</servlet-name>
-		<url-pattern>/UserServlet/login</url-pattern>
-		<url-pattern>/UserServlet/logout</url-pattern>
-		<url-pattern>/profile</url-pattern>
-		<url-pattern>/edit</url-pattern>
-		<url-pattern>/update</url-pattern>
-		<url-pattern>/delete</url-pattern>
-	</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserServlet</servlet-name>
+        <!-- User-->
+        <url-pattern>/UserServlet/login</url-pattern>
+        <url-pattern>/UserServlet/logout</url-pattern>
+        <url-pattern>/profile</url-pattern>
+        <url-pattern>/edit</url-pattern>
+        <url-pattern>/update</url-pattern>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
 
-	<servlet-mapping>
-		<servlet-name>MovieServlet</servlet-name>
-		<url-pattern>/MovieServlet/display</url-pattern>
-		<url-pattern>/MovieServlet/editMovie</url-pattern>
-		<url-pattern>/MovieServlet/updateMovie</url-pattern>
-		<url-pattern>/MovieServlet/deleteMovie</url-pattern>
-	</servlet-mapping>
+
+    <!--Review-->
+    <servlet>
+        <servlet-name>ReviewServlet</servlet-name>
+        <servlet-class>ReviewServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReviewServlet</servlet-name>
+        <url-pattern>/reviews</url-pattern>
+        <url-pattern>/postReview</url-pattern>
+        <url-pattern>/edits</url-pattern>
+        <url-pattern>/updatesreviews</url-pattern>
+        <url-pattern>/deletesreviews</url-pattern>
+</servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>MovieServlet</servlet-name>
+        <url-pattern>/MovieServlet/display</url-pattern>
+        <url-pattern>/MovieServlet/editMovie</url-pattern>
+        <url-pattern>/MovieServlet/updateMovie</url-pattern>
+        <url-pattern>/MovieServlet/deleteMovie</url-pattern>
+
+    </servlet-mapping>
 
 
 </web-app>
