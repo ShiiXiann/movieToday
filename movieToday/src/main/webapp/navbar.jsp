@@ -16,7 +16,7 @@
 	<nav class="navbar sticky-top navbar-expand-md navbar-light bg-light">
 		<ul class="navbar-nav mx-auto">
 			<li class="nav-item text-center"><a class="nav-link"
-				href="<%=request.getContextPath()%>/movie.jsp">Home</a></li>
+				href="<%=request.getContextPath()%>/MovieServlet/display">Home</a></li>
 			<li class="nav-item text-center"><a class="nav-link"
 				href="<%=request.getContextPath()%>/createmovie.jsp"> Add Movies</a></li>
 

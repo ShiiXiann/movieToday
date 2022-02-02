@@ -71,7 +71,7 @@ public class CMovieServlet extends HttpServlet {
 //			 writer.println("<h1>" + "You have successfully added a movie." +
 //			 "</h1>");
 //			 writer.close();
-			 response.sendRedirect("http://localhost:8080/movieToday/movie.jsp");
+			 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
 			 }
 		 }
 		 
