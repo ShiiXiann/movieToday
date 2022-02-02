@@ -250,7 +250,6 @@ public class ReviewServlet extends HttpServlet {
 		int uid = (int) session.getAttribute("id");
 		System.out.println("User Id is " + uid);
 		int mid = Integer.parseInt(request.getParameter("id"));
-		System.out.println("peng 4.0");
 		System.out.println("Movie Id is " + mid);
 		Review existingReview = new Review(rid, mid, uid, "");
 		// Step 1: Establishing a Connection

@@ -35,7 +35,7 @@
 				<li class="nav-item text-center"><a class="nav-link"
 					href="<%=request.getContextPath()%>/favourite.jsp">Favourite</a></li>
 				<li class="nav-item text-center"><a class="nav-link"
-					href="<%=request.getContextPath()%>/review.jsp">Review</a></li>
+					href="<%=request.getContextPath()%>/reviews">Review</a></li>
 				<li class="nav-item text-center"><a class="nav-link"
 					href="UserServlet/logout">Log out</a></li>
 			</c:if>
