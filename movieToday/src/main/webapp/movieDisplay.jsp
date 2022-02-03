@@ -51,6 +51,7 @@
 							<td><c:out value="${movie.movieImage}" /></td>
 <!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 
+							<td><a href="/movieToday/MovieServlet/addToFav?movieId=<c:out value='${movie.id}'/>">Add to Fav</a>
 							<td><a href="/movieToday/MovieServlet/editMovie?id=<c:out value='${movie.id}'/>">Edit</a>
 
 								&nbsp;&nbsp;&nbsp;&nbsp; 

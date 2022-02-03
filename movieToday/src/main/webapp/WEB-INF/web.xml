@@ -20,6 +20,12 @@
         <servlet-name>MovieServlet</servlet-name>
         <servlet-class>MovieServlet</servlet-class>
     </servlet>
+    
+    <servlet>
+        <servlet-name>FavouriteServlet</servlet-name>
+        <servlet-class>FavouriteServlet</servlet-class>
+    </servlet>
+    
 
 
     <servlet-mapping>
@@ -53,6 +59,16 @@
         <url-pattern>/MovieServlet/editMovie</url-pattern>
         <url-pattern>/MovieServlet/updateMovie</url-pattern>
         <url-pattern>/MovieServlet/deleteMovie</url-pattern>
+        <url-pattern>/MovieServlet/addToFav</url-pattern>
+
+    </servlet-mapping>
+    
+    <servlet-mapping>
+        <servlet-name>FavouriteServlet</servlet-name>
+        <url-pattern>/FavouriteServlet/display</url-pattern>
+        <url-pattern>/FavouriteServlet/deleteFavourites</url-pattern>
+        <url-pattern>/FavouriteServlet/displayJoinTable</url-pattern>
+        
 
     </servlet-mapping>
 

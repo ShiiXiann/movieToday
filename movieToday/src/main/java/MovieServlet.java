@@ -1,5 +1,6 @@
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -13,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class MovieServlet
@@ -80,12 +82,11 @@ public class MovieServlet extends HttpServlet {
 				System.out.println("testing");
 				listMovies(request, response);
 				break;
-				
+
 			case "/MovieServlet/home":
 				System.out.println("testing 6");
 				homeMovies(request, response);
 				break;
-
 
 			case "/MovieServlet/deleteMovie":
 				System.out.println("testing delete");
@@ -101,76 +102,133 @@ public class MovieServlet extends HttpServlet {
 				System.out.println("testing update");
 				updateMovie(request, response);
 				break;
+
+			case "/MovieServlet/addToFav":
+				System.out.println("testing adding to favourites");
+				addToFav(request, response);
+				break;
+				
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
 	}
 
+	private void addToFav(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, ServletException, IOException {
+		// TODO Auto-generated method stub
+
+		// Initialize a PrintWriter object to return the html values via the response
+		PrintWriter out = response.getWriter();
+		HttpSession session = request.getSession();
+		// get user id from the database
+		// retrieve the two id from the request from the web form
+		int mid = Integer.parseInt(request.getParameter("movieId"));
+		int uid = (int) session.getAttribute("id");
+
+		System.out.println("my sessionstorage is " + session.getAttribute("id"));
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movieToday", "root", "password");
+
+			// implement the sql query using prepared statement
+			// (https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)
+
+			PreparedStatement ps = con.prepareStatement("insert into FAVOURITE values (NULL,?,?)");
+
+			
+
+			// parse in the data retrieved from the web form request into the prepared
+			// statement accordingly
+
+			ps.setInt(1, mid);
+			ps.setInt(2, uid);
+			// perform the query on the database using the prepared statement
+			int i = ps.executeUpdate();
+			System.out.println("i="+i);
+			// check if the query had been successfully execute, return “You are
+			// successfully registered” via the response,
+			if (i > 0) {
+				PrintWriter writer = response.getWriter();
+				response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
+				writer.println("<h1>" + "You have successfully added the movie to favourites" + "</h1>");
+				writer.close();
+
+			}
+		}
+		// Step 8: catch and print out any exception
+		catch (Exception exception) {
+			System.out.println(exception);
+			out.close();
+		}
+
+	}
+
 	private void editMovies(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int mid = Integer.parseInt(request.getParameter("id"));
-		Movie existingMovie = new Movie(mid,"", "", "", "", 0, "","");
+		Movie existingMovie = new Movie(mid, "", "", "", "", 0, "", "");
 		try (Connection connection = getConnection();
-					PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MOVIE_BY_ID);) {
+				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_MOVIE_BY_ID);) {
 //					int mid = Integer.parseInt(request.getParameter("id"));
 //					preparedStatement.setInt(1, mid);
-					ResultSet rs = preparedStatement.executeQuery();
-					while (rs.next()) {
-						mid = rs.getInt("id");
-						String movieName = rs.getString("movieName");
-						String movieGenre = rs.getString("movieGenre");
-						String movieDescription = rs.getString("movieDescription");
-						String movieCasts = rs.getString("movieCasts");
-						float movieDuration = rs.getInt("movieDuration");
-						String movieDateRelease = rs.getString("movieDateRelease");
-						String movieImage = rs.getString("movieImage");
-						existingMovie = new Movie(mid, movieName, movieGenre, movieDescription,movieCasts,movieDuration,movieDateRelease,movieImage);
-					    System.out.println("movie id is=" + mid);
-					}
-				} catch (SQLException e) {
-					System.out.println(e.getMessage());
-				}
+			ResultSet rs = preparedStatement.executeQuery();
+			while (rs.next()) {
+				mid = rs.getInt("id");
+				String movieName = rs.getString("movieName");
+				String movieGenre = rs.getString("movieGenre");
+				String movieDescription = rs.getString("movieDescription");
+				String movieCasts = rs.getString("movieCasts");
+				float movieDuration = rs.getInt("movieDuration");
+				String movieDateRelease = rs.getString("movieDateRelease");
+				String movieImage = rs.getString("movieImage");
+				existingMovie = new Movie(mid, movieName, movieGenre, movieDescription, movieCasts, movieDuration,
+						movieDateRelease, movieImage);
+				System.out.println("movie id is=" + mid);
+			}
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
+		}
 		request.setAttribute("movie", existingMovie);
 		request.getRequestDispatcher("/editMovie.jsp").forward(request, response);
 	}
-	
+
 	private void updateMovie(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
-		 int id = Integer.parseInt(request.getParameter("id"));
-		 String movieName = request.getParameter("movieName");
-		 String movieGenre = request.getParameter("movieGenre");
-		 String movieDescription = request.getParameter("movieDescription");
-		 String movieCasts = request.getParameter("movieCasts");
-		 int movieDuration = Integer.parseInt(request.getParameter("movieDuration"));
-		 String movieDateRelease = request.getParameter("movieDateRelease");
-		 String movieImage = request.getParameter("movieImage");
-		 try (Connection connection = getConnection(); PreparedStatement statement =
-				 connection.prepareStatement(UPDATE_MOVIE_SQL);) {
-				  statement.setString(1, movieName);
-				  statement.setString(2, movieGenre);
-				  statement.setString(3, movieDescription);
-				  statement.setString(4, movieCasts);
-				  statement.setInt(5, movieDuration);
-				  statement.setString(6, movieDateRelease);
-				  statement.setString(7, movieImage);
-				  statement.setInt(8, id);
-				  int i = statement.executeUpdate();
-				  }
+		int id = Integer.parseInt(request.getParameter("id"));
+		String movieName = request.getParameter("movieName");
+		String movieGenre = request.getParameter("movieGenre");
+		String movieDescription = request.getParameter("movieDescription");
+		String movieCasts = request.getParameter("movieCasts");
+		int movieDuration = Integer.parseInt(request.getParameter("movieDuration"));
+		String movieDateRelease = request.getParameter("movieDateRelease");
+		String movieImage = request.getParameter("movieImage");
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(UPDATE_MOVIE_SQL);) {
+			statement.setString(1, movieName);
+			statement.setString(2, movieGenre);
+			statement.setString(3, movieDescription);
+			statement.setString(4, movieCasts);
+			statement.setInt(5, movieDuration);
+			statement.setString(6, movieDateRelease);
+			statement.setString(7, movieImage);
+			statement.setInt(8, id);
+			int i = statement.executeUpdate();
+		}
 //		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/updateMovie");
-		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+		response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
 	}
-	
+
 	private void deleteMovie(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		try (Connection connection = getConnection(); PreparedStatement statement =
-				connection.prepareStatement(DELETE_MOVIE_SQL);) {
-				 statement.setInt(1, id);
-				 int i = statement.executeUpdate();
-				 }
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(DELETE_MOVIE_SQL);) {
+			statement.setInt(1, id);
+			int i = statement.executeUpdate();
+		}
 //		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/deleteMovie");
-		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+		response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
 	}
 
 	private void listMovies(HttpServletRequest request, HttpServletResponse response)
@@ -202,7 +260,7 @@ public class MovieServlet extends HttpServlet {
 		request.getRequestDispatcher("/movieDisplay.jsp").forward(request, response);
 
 	}
-	
+
 	private void homeMovies(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<Movie> movies = new ArrayList<>();
@@ -232,7 +290,6 @@ public class MovieServlet extends HttpServlet {
 		request.getRequestDispatcher("/movie.jsp").forward(request, response);
 
 	}
-
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse

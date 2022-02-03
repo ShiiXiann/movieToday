@@ -33,7 +33,7 @@
 				<li class="nav-item text-center"><a class="nav-link" href="<%=request.getContextPath()%>/profile?id=<c:out value='${sessionScope["id"]}'/>">Profile</a>
 				</li>
 				<li class="nav-item text-center"><a class="nav-link"
-					href="<%=request.getContextPath()%>/favourite.jsp">Favourite</a></li>
+					href="<%=request.getContextPath()%>/FavouriteServlet/displayJoinTable">Favourite</a></li>
 				<li class="nav-item text-center"><a class="nav-link"
 					href="<%=request.getContextPath()%>/reviews">Review</a></li>
 				<li class="nav-item text-center"><a class="nav-link"
