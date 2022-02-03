@@ -37,7 +37,7 @@
 				<li class="nav-item text-center"><a class="nav-link"
 					href="<%=request.getContextPath()%>/reviews">Review</a></li>
 				<li class="nav-item text-center"><a class="nav-link"
-					href="UserServlet/logout">Log out</a></li>
+					href="<%=request.getContextPath()%>/UserServlet/logout">Log out</a></li>
 			</c:if>
 		</ul>
 	</nav>
