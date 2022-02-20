@@ -15,7 +15,7 @@
 <!-- Navigation Bar -->
 <jsp:include page="navbar.jsp" />
   
-	<h4 style="text-align: center;">Welcome, ${username} !</h4>
+	
 	<%
 	if (session.getAttribute("id") == null)
 		response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
@@ -50,10 +50,10 @@
 						</div>
 						<c:out value="id: ${user.id}" />
 						<div class=" d-flex mt-2">
-								<button class="btn1 btn-success"><a href="edit?id=<c:out value='${user.id}'/>" style="color:inherit">Edit Profile</a></button>
+								<button class="btn1 btn-success" name="editProfile"><a href="edit?id=<c:out value='${user.id}'/>" style="color:inherit">Edit Profile</a></button>
 						</div>
 							<div class=" d-flex mt-2">
-								<button class="btn1 btn-danger"><a href="delete?id=<c:out value='${user.id}'/>" style="color:inherit">Delete Profile</a></button>
+								<button class="btn1 btn-danger" name="deleteProfile"><a href="delete?id=<c:out value='${user.id}'/>" style="color:inherit">Delete Profile</a></button>
 						</div>
 					
 

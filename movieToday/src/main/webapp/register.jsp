@@ -62,7 +62,7 @@
 							<!--To disable the register button depending on the agreed Boolean
   value -->
 							<button class="btn btn-success" type="submit"
-								style="text-align: center;" value="Register">Register</button>
+								style="text-align: center;" value="Register" name="register">Register</button>
 						</div>
 					</div>
 

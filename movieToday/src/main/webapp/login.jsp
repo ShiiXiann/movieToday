@@ -46,7 +46,7 @@
 							<!--To disable the register button depending on the agreed Boolean
   value -->
 							<button class="btn btn-success" type="submit" value="Login"
-								style="text-align: center;">Login</button>
+								style="text-align: center;" name="login">Login</button>
 						</div>
 					</div>
 					<br>
