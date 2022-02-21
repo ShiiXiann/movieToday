@@ -58,8 +58,8 @@ class UserFunctionTest {
 	@Test
 	void testLoginFunction() {
 		// see whether user matches database's credentials
-		var trueCredentials = userServlet.loginFunction("mag", "mag123");
-		var falseCredentials = userServlet.loginFunction(inputUsername, inputPassword);
+		User trueCredentials = userServlet.loginFunction("mag", "mag123");
+		User falseCredentials = userServlet.loginFunction(inputUsername, inputPassword);
 		assertTrue(!trueCredentials.equals(falseCredentials));
 	}
 
