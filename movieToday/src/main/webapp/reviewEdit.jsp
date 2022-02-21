@@ -38,7 +38,7 @@
 				</fieldset>
 
 
-				<button type="submit" class="btn btn-success">Save</button>
+				<button type="submit" class="btn btn-success" name ="save">Save</button>
 				</form>
 			</div>
 		</div>

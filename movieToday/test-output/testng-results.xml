@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2022-02-19T09:56:30 SGT" name="Default suite" finished-at="2022-02-19T09:56:53 SGT" duration-ms="22366">
+    <groups>
+    </groups>
+    <test started-at="2022-02-19T09:56:30 SGT" name="Default test" finished-at="2022-02-19T09:56:53 SGT" duration-ms="22366">
+      <class name="movieToday.ReviewTest">
+        <test-method is-config="true" signature="beforeTest()[pri:0, instance:movieToday.ReviewTest@27ae2fd0]" started-at="2022-02-19T09:56:30 SGT" name="beforeTest" finished-at="2022-02-19T09:56:32 SGT" duration-ms="1772" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- beforeTest -->
+        <test-method signature="aLogin()[pri:0, instance:movieToday.ReviewTest@27ae2fd0]" started-at="2022-02-19T09:56:32 SGT" name="aLogin" finished-at="2022-02-19T09:56:38 SGT" duration-ms="5636" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- aLogin -->
+        <test-method signature="bCreateReview()[pri:0, instance:movieToday.ReviewTest@27ae2fd0]" started-at="2022-02-19T09:56:38 SGT" name="bCreateReview" finished-at="2022-02-19T09:56:44 SGT" duration-ms="6413" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- bCreateReview -->
+        <test-method signature="cEditReview()[pri:0, instance:movieToday.ReviewTest@27ae2fd0]" started-at="2022-02-19T09:56:44 SGT" name="cEditReview" finished-at="2022-02-19T09:56:51 SGT" duration-ms="6350" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- cEditReview -->
+        <test-method signature="dDeleteReview()[pri:0, instance:movieToday.ReviewTest@27ae2fd0]" started-at="2022-02-19T09:56:51 SGT" name="dDeleteReview" finished-at="2022-02-19T09:56:53 SGT" duration-ms="2103" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- dDeleteReview -->
+        <test-method is-config="true" signature="afterTest()[pri:0, instance:movieToday.ReviewTest@27ae2fd0]" started-at="2022-02-19T09:56:53 SGT" name="afterTest" finished-at="2022-02-19T09:56:53 SGT" duration-ms="0" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- afterTest -->
+      </class> <!-- movieToday.ReviewTest -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
