@@ -131,8 +131,8 @@ public class ReviewServlet extends HttpServlet {
 
 			// perform the query on the database using the prepared statement
 			int i = ps.executeUpdate();
-			// check if the query had been successfully execute, return “You are
-			// successfully registered” via the response,
+			// check if the query had been successfully execute, return You are
+			// successfully registered via the response,
 			if (i > 0) {
 				PrintWriter writer = response.getWriter();
 				 response.sendRedirect("http://localhost:8080/movieToday/reviews");
@@ -190,8 +190,8 @@ public class ReviewServlet extends HttpServlet {
 //
 //			// perform the query on the database using the prepared statement
 //			int i = ps.executeUpdate();
-//			// check if the query had been successfully execute, return “You are
-//			// successfully registered” via the response,
+//			// check if the query had been successfully execute, return You are
+//			// successfully registered via the response,
 //			if (i > 0) {
 //				PrintWriter writer = response.getWriter();
 //				writer.println("<h1>" + "You have successfully create a review" + "</h1>");
