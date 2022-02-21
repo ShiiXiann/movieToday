@@ -18,7 +18,6 @@ public class UserTest {
 	public void aRegister() throws InterruptedException {
 		// navigate the browser to this URL
 		driver.get("http://localhost:8080/movieToday/register.jsp");
-		Thread.sleep(2000);
 
 		// fill up the register form
 		driver.findElement(By.name("username")).sendKeys("niklaus");
@@ -26,12 +25,11 @@ public class UserTest {
 		driver.findElement(By.name("email")).sendKeys("theoriginals@gmail.com");
 		driver.findElement(By.name("phoneNumber")).sendKeys("98271627");
 
-		Thread.sleep(1000);
 		// hit register button
 		driver.findElement(By.name("register")).click();
 		driver.getCurrentUrl();
 
-		Thread.sleep(1000);
+
 	}
 
 	@Test
@@ -40,14 +38,12 @@ public class UserTest {
 		driver.get("http://localhost:8080/movieToday/login.jsp");
 		driver.findElement(By.name("username")).sendKeys("niklaus");
 		driver.findElement(By.name("password")).sendKeys("camille");
-		Thread.sleep(2000);
 
 		// hit login button
 		driver.findElement(By.name("login")).click();
 
 		// redirects to profile page
 		driver.getCurrentUrl();
-		Thread.sleep(2000);
 
 	}
 
@@ -56,28 +52,24 @@ public class UserTest {
 
 		// user hits edit profile button
 		driver.findElement(By.name("editProfile")).click();
-		Thread.sleep(1000);
+
 		// redirected to edit user profile page
 		driver.getCurrentUrl();
-		Thread.sleep(2000);
 
 		// user to retype their information
 		driver.findElement(By.name("username")).clear();
 		driver.findElement(By.name("password")).clear();
 		driver.findElement(By.name("email")).clear();
 		driver.findElement(By.name("phoneNumber")).clear();
-		Thread.sleep(2000);
 
 		// refill up edit form
 		driver.findElement(By.name("username")).sendKeys("freya");
 		driver.findElement(By.name("password")).sendKeys("keelin");
 		driver.findElement(By.name("email")).sendKeys("freya@gmail.com");
 		driver.findElement(By.name("phoneNumber")).sendKeys("8887162");
-		Thread.sleep(2000);
 
 		// user hits save button
 		driver.findElement(By.name("save")).click();
-		Thread.sleep(2000);
 		driver.getCurrentUrl();
 		
 
@@ -87,9 +79,7 @@ public class UserTest {
 	public void dDeleteProfile() throws InterruptedException {
 		// fill up login form
 		driver.findElement(By.name("deleteProfile")).click();
-		Thread.sleep(1000);
 		driver.getCurrentUrl();
-		Thread.sleep(2000);
 
 	}
 
