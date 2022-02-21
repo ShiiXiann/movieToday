@@ -28,7 +28,7 @@
 				type="text" name="movieImage" size="20"><br>
 			<!-- Implement submit button with type = submit to perform the request when clicked -->
 			<div class="text-center">
-				<input type="submit" value="Add movie" class="bg-primary text-white" />
+				<input type="submit" value="Add movie" name="addMovie" class="bg-primary text-white" />
 			</div>
 		</form>
 	</div>

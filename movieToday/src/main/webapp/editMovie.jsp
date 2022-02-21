@@ -88,7 +88,7 @@ value='${movie.movieDateRelease}' />" class="form-control"
 value='${movie.movieImage}' />" class="form-control"
 						name="movieImage">
 				</fieldset>
-				<button type="submit" class="btn btn-success">Save</button>
+				<button type="submit" class="btn btn-success" name="savebtn">Save</button>
 				</form>
 			</div>
 		</div>

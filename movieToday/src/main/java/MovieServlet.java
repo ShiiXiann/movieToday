@@ -146,8 +146,8 @@ public class MovieServlet extends HttpServlet {
 			// perform the query on the database using the prepared statement
 			int i = ps.executeUpdate();
 			System.out.println("i="+i);
-			// check if the query had been successfully execute, return “You are
-			// successfully registered” via the response,
+			// check if the query had been successfully execute, return ï¿½You are
+			// successfully registeredï¿½ via the response,
 			if (i > 0) {
 				PrintWriter writer = response.getWriter();
 				response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
@@ -164,7 +164,7 @@ public class MovieServlet extends HttpServlet {
 
 	}
 
-	private void editMovies(HttpServletRequest request, HttpServletResponse response)
+	protected void editMovies(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, ServletException, IOException {
 		int mid = Integer.parseInt(request.getParameter("id"));
 		Movie existingMovie = new Movie(mid, "", "", "", "", 0, "", "");
@@ -193,7 +193,7 @@ public class MovieServlet extends HttpServlet {
 		request.getRequestDispatcher("/editMovie.jsp").forward(request, response);
 	}
 
-	private void updateMovie(HttpServletRequest request, HttpServletResponse response)
+	protected void updateMovie(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String movieName = request.getParameter("movieName");
@@ -203,35 +203,44 @@ public class MovieServlet extends HttpServlet {
 		int movieDuration = Integer.parseInt(request.getParameter("movieDuration"));
 		String movieDateRelease = request.getParameter("movieDateRelease");
 		String movieImage = request.getParameter("movieImage");
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(UPDATE_MOVIE_SQL);) {
-			statement.setString(1, movieName);
-			statement.setString(2, movieGenre);
-			statement.setString(3, movieDescription);
-			statement.setString(4, movieCasts);
-			statement.setInt(5, movieDuration);
-			statement.setString(6, movieDateRelease);
-			statement.setString(7, movieImage);
-			statement.setInt(8, id);
-			int i = statement.executeUpdate();
-		}
+		updateMovieDB(movieName, movieGenre, movieDescription, movieCasts, movieDuration, movieDateRelease, movieImage, id);
+//		try (Connection connection = getConnection();
+//				PreparedStatement statement = connection.prepareStatement(UPDATE_MOVIE_SQL);) {
+//			statement.setString(1, movieName);
+//			statement.setString(2, movieGenre);
+//			statement.setString(3, movieDescription);
+//			statement.setString(4, movieCasts);
+//			statement.setInt(5, movieDuration);
+//			statement.setString(6, movieDateRelease);
+//			statement.setString(7, movieImage);
+//			statement.setInt(8, id);
+//			int i = statement.executeUpdate();
+//		}
 //		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/updateMovie");
-		response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+		if(updateMovieDB(movieName, movieGenre, movieDescription, movieCasts, movieDuration, movieDateRelease, movieImage, id)) {
+			response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+		}
+
+		
 	}
 
-	private void deleteMovie(HttpServletRequest request, HttpServletResponse response)
+	protected void deleteMovie(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException {
 		int id = Integer.parseInt(request.getParameter("id"));
-		try (Connection connection = getConnection();
-				PreparedStatement statement = connection.prepareStatement(DELETE_MOVIE_SQL);) {
-			statement.setInt(1, id);
-			int i = statement.executeUpdate();
+		
+		if(deleteMovieDB(id)) {
+			response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+
 		}
-//		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/deleteMovie");
-		response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+//		try (Connection connection = getConnection();
+//				PreparedStatement statement = connection.prepareStatement(DELETE_MOVIE_SQL);) {
+//			statement.setInt(1, id);
+//			int i = statement.executeUpdate();
+//		}
+////		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/deleteMovie");
 	}
 
-	private void listMovies(HttpServletRequest request, HttpServletResponse response)
+	protected void listMovies(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<Movie> movies = new ArrayList<>();
 		System.out.println("testing 2");
@@ -261,7 +270,7 @@ public class MovieServlet extends HttpServlet {
 
 	}
 
-	private void homeMovies(HttpServletRequest request, HttpServletResponse response)
+	protected void homeMovies(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		List<Movie> movies = new ArrayList<>();
 		System.out.println("testing 2");
@@ -300,5 +309,42 @@ public class MovieServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
+	
+	public boolean updateMovieDB(String movieName, String movieGenre, String movieDescription, String movieCasts, int movieDuration, String movieDateRelease, String movieImage, int id)
+			{
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(UPDATE_MOVIE_SQL);) {
+			statement.setString(1, movieName);
+			statement.setString(2, movieGenre);
+			statement.setString(3, movieDescription);
+			statement.setString(4, movieCasts);
+			statement.setInt(5, movieDuration);
+			statement.setString(6, movieDateRelease);
+			statement.setString(7, movieImage);
+			statement.setInt(8, id);
+			int i = statement.executeUpdate();
+		}
+		catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+		return true;
+		
+	}
+	
+	public boolean deleteMovieDB(int id){
+		try (Connection connection = getConnection();
+				PreparedStatement statement = connection.prepareStatement(DELETE_MOVIE_SQL);) {
+			statement.setInt(1, id);
+			int i = statement.executeUpdate();
+		}
+		catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+		return true;
+	}
+	
+	
+	
+	
 
 }
