@@ -137,12 +137,12 @@ public class UserServlet extends HttpServlet {
 					session.getAttribute("isLoggedIn");
 					System.out.println(session.getAttribute("id"));
 					System.out.println(session.getAttribute("username"));
-					response.sendRedirect("http://localhost:8080/movieToday/profile?id=" + uid);
+					response.sendRedirect("/movieToday/profile?id=" + uid);
 				}
 			} else {
 
 				System.out.println("Wrong username or password");
-				response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
+				response.sendRedirect("/movieToday/login.jsp");
 			}
 		}
 
@@ -159,7 +159,7 @@ public class UserServlet extends HttpServlet {
 		session.removeAttribute("username");
 		session.invalidate();
 		System.out.println("You are logged out");
-		response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
+		response.sendRedirect("/movieToday/login.jsp");
 
 	}
 
