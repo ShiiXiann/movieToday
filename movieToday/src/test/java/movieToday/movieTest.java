@@ -12,23 +12,19 @@ import org.testng.annotations.AfterTest;
 
 public class movieTest {
   //declare Selenium WebDriver
-  private WebDriver webDriver;		
+  private WebDriver driver;		
   
-  @Test
-  public void f() throws InterruptedException{
-	  // define the chrome driver
-	  System.setProperty("webdriver.chrome.driver","C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
+  
+  @Test(priority=1)
+  public void addMovie() throws InterruptedException{
 	  
 	  //define the drive instance
-	  WebDriver driver = new ChromeDriver();
-	  
-	  //navigate to url http://localhost:8080/movieToday/MovieServlet/display
-	  driver.get("http://localhost:8080/movieToday/MovieServlet/display");
+	 
 	  
 	  // browser look for link with text value
 	  driver.findElement(By.linkText("Add New Movies")).click();
 	  driver.getCurrentUrl();
-	  
+  
 	  
 	// steps for creating a movie
 	  driver.findElement(By.name("movieName")).sendKeys("White House Down");
@@ -40,7 +36,12 @@ public class movieTest {
 	  driver.findElement(By.name("movieImage")).sendKeys("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.rottentomatoes.com%2Fm%2Fwhite_house_down&psig=AOvVaw0QUjY_uw97aZEsS1hRG7xe&ust=1645001369141000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjo0uSpgfYCFQAAAAAdAAAAABAD");
 	  driver.findElement(By.name("addMovie")).click();
 //	  driver.get("http://localhost:8080/movieToday/MovieServlet/display");
+  }
+ 
+  @Test(priority=2)
+  public void updateMovie() throws InterruptedException{
 	  
+  
 	  //steps for updating a movie
 	  driver.findElement(By.linkText("Edit")).click();
 	  driver.getCurrentUrl();
@@ -54,21 +55,34 @@ public class movieTest {
 	  driver.findElement(By.name("movieImage")).sendKeys("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.rottentomatoes.com%2Fm%2Fwhite_house_down&psig=AOvVaw0QUjY_uw97aZEsS1hRG7xe&ust=1645001369141000&source=images&cd=vfe&ved=0CAsQjRxqFwoTCKjo0uSpgfYCFQAAAAAdAAAAABAD");
 	  driver.findElement(By.name("savebtn")).click();
 	  Thread.sleep(2000);
-	  
+  }
+@Test(priority=3)
+  public void deleteMovie() throws InterruptedException{
 	  //steps for deleting a movie
-	  driver.findElement(By.linkText("Delete")).click();
+	driver.findElement(By.linkText("Delete")).click();
   }
   
   
   
   @BeforeTest
   public void beforeTest() {
+
+	  // define the chrome driver
+	  System.setProperty("webdriver.chrome.driver","C:\\Program Files (x86)\\Google\\Chrome\\chromedriver.exe");
+	  
+	  //define the drive instance
+	  driver = new ChromeDriver();
+	  
+	  //navigate to url http://localhost:8080/movieToday/MovieServlet/display
+	  driver.get("http://localhost:8080/movieToday/MovieServlet/display");
+	  
+	  
 	  
   }
 
   @AfterTest
   public void afterTest() {
-	  			
+	  driver.quit();
   }
 
 }
