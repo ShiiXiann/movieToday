@@ -150,7 +150,7 @@ public class MovieServlet extends HttpServlet {
 			// successfully registered� via the response,
 			if (i > 0) {
 				PrintWriter writer = response.getWriter();
-				response.sendRedirect("/movieToday/FavouriteServlet/displayJoinTable");
+				response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
 				writer.println("<h1>" + "You have successfully added the movie to favourites" + "</h1>");
 				writer.close();
 
