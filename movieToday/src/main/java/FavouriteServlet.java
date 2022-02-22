@@ -29,7 +29,8 @@ public class FavouriteServlet extends HttpServlet {
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "password";
 
-	// Step 2: Prepare list of SQL prepared statements to perform CRD to our database
+	// Step 2: Prepare list of SQL prepared statements to perform CRD to our
+	// database
 
 	private static final String INSERT_FAVOURITES_SQL = "INSERT INTO favourite" + " (movie_id, user_id) VALUES "
 			+ " (?, ?);";
@@ -37,7 +38,7 @@ public class FavouriteServlet extends HttpServlet {
 	private static final String SELECT_FAVOURITES_BY_ID = "select movie_id, user_id from favourite where id = ?";
 	private static final String SELECT_ALL_FAVOURITES = "select * from favourite ";
 	private static final String DELETE_FAVOURITES_SQL = "delete from favourite where id = ?;";
-	
+
 	private static final String SELECT_JOIN_FAVOURITES = "SELECT favourite.id, movie.movieName, movie.movieGenre, movie.movieDescription, movie.movieCasts, movie.movieDuration, movie.movieDateRelease, movie.movieImage FROM movie INNER JOIN favourite ON favourite.movie_id=movie.id;";
 
 	// Step 3: Implement the getConnection method which facilitates connection to
@@ -91,29 +92,106 @@ public class FavouriteServlet extends HttpServlet {
 			case "/FavouriteServlet/display":
 				listFavourites(request, response);
 				break;
-				
+
 			case "/FavouriteServlet/displayJoinTable":
 				joinTable(request, response);
 				break;
 
-				
 			}
 		} catch (SQLException ex) {
 			throw new ServletException(ex);
 		}
 	}
 
-	private void joinTable(HttpServletRequest request, HttpServletResponse response) 
+	private void joinTable(HttpServletRequest request, HttpServletResponse response)
 			throws SQLException, IOException, ServletException {
 		// TODO Auto-generated method stub
-		
-		List<FavouriteJoin> favourites = new ArrayList<>();
+
+		// List<FavouriteJoin> favourites = new ArrayList<>();
 		System.out.println("testing join table");
+
+		List<FavouriteJoin> favourites = joinTableFunction();
+
+		// Step 5.4: Set the movie details and favourite id into the joinTable attribute
+		// to be pass to the favDisplay.jsp
+
+		request.setAttribute("joinTable", favourites);
+		request.getRequestDispatcher("/favDisplay.jsp").forward(request, response);
+
+	}
+
+	private void PostFavourite(HttpServletRequest request, HttpServletResponse response) {
+		// TODO Auto-generated method stub
+
+	}
+
+	// Step 5: listFavourites function to connect to the database and retrieve all
+	// favourite records
+	private void listFavourites(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException, ServletException {
+		// List<Favourite> favourites = new ArrayList<>();
+		System.out.println("testing list fav");
+//		try (Connection connection = getConnection();
+//
+//				// Step 5.1: Create a statement using connection object
+//				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FAVOURITES);) {
+//			
+//			// Step 5.2: Execute the query or update query
+//			ResultSet rs = preparedStatement.executeQuery();
+//
+//			// Step 5.3: Process the ResultSet object.
+//			while (rs.next()) {
+//				int fid = rs.getInt("id");
+//				int movie_id = rs.getInt("movie_id");
+//				int user_id = rs.getInt("user_id");
+//				favourites.add(new Favourite(fid, movie_id, user_id));
+//			}
+//		} catch (SQLException e) {
+//			System.out.println(e.getMessage());
+//		}
+		List<Favourite> favourites = listFavouritesFunction();
+
+		// Step 5.4: Set the favourites list into the listFavourites attribute to be
+		// pass to the favDisplay.jsp
+
+		request.setAttribute("listFavourites", favourites);
+		request.getRequestDispatcher("/favDisplay.jsp").forward(request, response);
+	}
+
+	// method to delete favourite
+	private void deleteFavourite(HttpServletRequest request, HttpServletResponse response)
+			throws SQLException, IOException {
+
+		// Step 1: Retrieve value from the request
+
+		int id = Integer.parseInt(request.getParameter("id"));
+
+		// Step 2: Attempt connection with database and execute delete user SQL query
+		// Step 3: redirect back to FavouriteServlet dashboard (note: remember to change
+		// the url to your project name)
+		if (deleteFavFunction(id) == true) {
+			response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
+		}
+
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+	}
+
+	public List<FavouriteJoin> joinTableFunction() {
+		List<FavouriteJoin> favourites = new ArrayList<>();
 		try (Connection connection = getConnection();
 
 				// Step 5.1: Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_JOIN_FAVOURITES);) {
-			
+
 			// Step 5.2: Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -127,38 +205,25 @@ public class FavouriteServlet extends HttpServlet {
 				int movieDuration = rs.getInt("movieDuration");
 				String movieDateRelease = rs.getString("movieDateRelease");
 				String movieImage = rs.getString("movieImage");
-				favourites.add(new FavouriteJoin(fid, movieName, movieGenre, movieDescription, movieCasts, movieDuration,
-						movieDateRelease, movieImage));
-				
+				favourites.add(new FavouriteJoin(fid, movieName, movieGenre, movieDescription, movieCasts,
+						movieDuration, movieDateRelease, movieImage));
+
 				System.out.println(rs.getInt("id"));
 			}
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
+		return favourites;
 
-		// Step 5.4: Set the users list into the listUsers attribute to be pass to the
-		// userManagement.jsp
-
-		request.setAttribute("joinTable", favourites);
-		request.getRequestDispatcher("/favDisplay.jsp").forward(request, response);
-		
 	}
 
-	private void PostFavourite(HttpServletRequest request, HttpServletResponse response) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	// Step 5: listFavourites function to connect to the database and retrieve all favourite records
-	private void listFavourites(HttpServletRequest request, HttpServletResponse response)
-			throws SQLException, IOException, ServletException {
+	public List<Favourite> listFavouritesFunction() {
 		List<Favourite> favourites = new ArrayList<>();
-		System.out.println("testing list fav");
 		try (Connection connection = getConnection();
 
 				// Step 5.1: Create a statement using connection object
 				PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL_FAVOURITES);) {
-			
+
 			// Step 5.2: Execute the query or update query
 			ResultSet rs = preparedStatement.executeQuery();
 
@@ -172,41 +237,18 @@ public class FavouriteServlet extends HttpServlet {
 		} catch (SQLException e) {
 			System.out.println(e.getMessage());
 		}
-
-		// Step 5.4: Set the users list into the listUsers attribute to be pass to the
-		// userManagement.jsp
-
-		request.setAttribute("listFavourites", favourites);
-		request.getRequestDispatcher("/favDisplay.jsp").forward(request, response);
+		return favourites;
 	}
 
-	// method to delete favourite
-	private void deleteFavourite(HttpServletRequest request, HttpServletResponse response) throws SQLException, IOException {
-
-		// Step 1: Retrieve value from the request
-
-		int id = Integer.parseInt(request.getParameter("id"));
-
-		// Step 2: Attempt connection with database and execute delete user SQL query
-
+	public boolean deleteFavFunction(int id) {
 		try (Connection connection = getConnection();
 				PreparedStatement statement = connection.prepareStatement(DELETE_FAVOURITES_SQL);) {
 			statement.setInt(1, id);
 			int i = statement.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println(e.getMessage());
 		}
-		// Step 3: redirect back to FavouriteServlet dashboard (note: remember to change
-		// the url to your project name)
-		response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
-	 *      response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		return true;
 	}
 
 }

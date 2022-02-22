@@ -48,7 +48,7 @@
 <!-- For each user in the database, Edit/Delete buttons which invokes the edit/delete functions -->
 
 <td><a
-								href="http://localhost:8080/movieToday/FavouriteServlet/deleteFavourites?id=<c:out value='${join.id}' />">Delete</a></td>
+								href="http://localhost:8080/movieToday/FavouriteServlet/deleteFavourites?id=<c:out value='${join.id}' />">Remove</a></td>
 
 						</tr>
 					</c:forEach>

@@ -118,48 +118,26 @@ public class MovieServlet extends HttpServlet {
 			throws SQLException, ServletException, IOException {
 		// TODO Auto-generated method stub
 
+		// step 1 - front end
 		// Initialize a PrintWriter object to return the html values via the response
 		PrintWriter out = response.getWriter();
 		HttpSession session = request.getSession();
-		// get user id from the database
-		// retrieve the two id from the request from the web form
+		// get user id and movie id from the database
 		int mid = Integer.parseInt(request.getParameter("movieId"));
 		int uid = (int) session.getAttribute("id");
 
 		System.out.println("my sessionstorage is " + session.getAttribute("id"));
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movieToday", "root", "password");
+	
+		// step 2 - backend
+		int i = addToFavFunction(mid,uid);
+		
+		// step 3 - sending front end
+		if (i > 0) {
+			PrintWriter writer = response.getWriter();
+			response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
+			writer.println("<h1>" + "You have successfully added the movie to favourites" + "</h1>");
+			writer.close();
 
-			// implement the sql query using prepared statement
-			// (https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)
-
-			PreparedStatement ps = con.prepareStatement("insert into FAVOURITE values (NULL,?,?)");
-
-			
-
-			// parse in the data retrieved from the web form request into the prepared
-			// statement accordingly
-
-			ps.setInt(1, mid);
-			ps.setInt(2, uid);
-			// perform the query on the database using the prepared statement
-			int i = ps.executeUpdate();
-			System.out.println("i="+i);
-			// check if the query had been successfully execute, return “You are
-			// successfully registered” via the response,
-			if (i > 0) {
-				PrintWriter writer = response.getWriter();
-				response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
-				writer.println("<h1>" + "You have successfully added the movie to favourites" + "</h1>");
-				writer.close();
-
-			}
-		}
-		// Step 8: catch and print out any exception
-		catch (Exception exception) {
-			System.out.println(exception);
-			out.close();
 		}
 
 	}
@@ -299,6 +277,36 @@ public class MovieServlet extends HttpServlet {
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	public int addToFavFunction(int mid, int uid) {
+		int i = 0;
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/movieToday", "root", "password");
+
+			// implement the sql query using prepared statement
+			// (https://docs.oracle.com/javase/tutorial/jdbc/basics/prepared.html)
+
+			PreparedStatement ps = con.prepareStatement("insert into FAVOURITE values (NULL,?,?)");
+
+			// parse in the data retrieved from the web form request into the prepared statement accordingly
+
+			ps.setInt(1, mid);
+			ps.setInt(2, uid);
+			// perform the query on the database using the prepared statement
+			i = ps.executeUpdate();
+			return i;
+			//System.out.println("i="+i);
+			
+			
+		}
+		// Step 8: catch and print out any exception
+		catch (Exception exception) {
+			System.out.println(exception);
+			//out.close();
+		}
+		return i;
 	}
 
 }
