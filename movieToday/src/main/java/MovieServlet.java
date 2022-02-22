@@ -146,8 +146,8 @@ public class MovieServlet extends HttpServlet {
 			// perform the query on the database using the prepared statement
 			int i = ps.executeUpdate();
 			System.out.println("i="+i);
-			// check if the query had been successfully execute, return “You are
-			// successfully registered” via the response,
+			// check if the query had been successfully execute, return ï¿½You are
+			// successfully registeredï¿½ via the response,
 			if (i > 0) {
 				PrintWriter writer = response.getWriter();
 				response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
@@ -228,7 +228,7 @@ public class MovieServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 		}
 //		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/deleteMovie");
-		response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+		response.sendRedirect("/movieToday/MovieServlet/display");
 	}
 
 	private void listMovies(HttpServletRequest request, HttpServletResponse response)
