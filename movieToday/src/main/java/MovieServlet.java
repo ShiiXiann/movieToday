@@ -216,7 +216,7 @@ public class MovieServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 		}
 //		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/updateMovie");
-		response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
+		response.sendRedirect("/movieToday/MovieServlet/display");
 	}
 
 	private void deleteMovie(HttpServletRequest request, HttpServletResponse response)
@@ -228,7 +228,7 @@ public class MovieServlet extends HttpServlet {
 			int i = statement.executeUpdate();
 		}
 //		 response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/deleteMovie");
-		response.sendRedirect("/movieToday/MovieServlet/display");
+		response.sendRedirect("http://localhost:8080/movieToday/MovieServlet/display");
 	}
 
 	private void listMovies(HttpServletRequest request, HttpServletResponse response)
