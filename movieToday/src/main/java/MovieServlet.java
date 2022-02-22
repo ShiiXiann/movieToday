@@ -134,7 +134,7 @@ public class MovieServlet extends HttpServlet {
 		// step 3 - sending front end
 		if (i > 0) {
 			PrintWriter writer = response.getWriter();
-			response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
+			response.sendRedirect("/movieToday/FavouriteServlet/displayJoinTable");
 			writer.println("<h1>" + "You have successfully added the movie to favourites" + "</h1>");
 			writer.close();
 
