@@ -18,7 +18,7 @@
 	
 	<%
 	if (session.getAttribute("id") == null)
-		response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
+		response.sendRedirect("/movieToday/login.jsp");
 	%>
 
 	<div class="container" style="text-align: center;">

@@ -121,7 +121,7 @@ public class UserServlet extends HttpServlet {
 		// 3rd
 		if (getLogin.getId() == 0) {
 			System.out.println("Wrong username or password");
-			response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
+			response.sendRedirect("/movieToday/login.jsp");
 		}
 		if (getLogin.getId() != 0) {
 			if (getLogin.getUsername().equals(enteredUsername) && (getLogin.getPassword().equals(enteredPassword))) {
@@ -139,7 +139,7 @@ public class UserServlet extends HttpServlet {
 				session.getAttribute("isLoggedIn");
 				System.out.println("Your UserId is: " + session.getAttribute("id"));
 				System.out.println("Your Username is: " + session.getAttribute("username"));
-				response.sendRedirect("http://localhost:8080/movieToday/profile?id=" + uid);
+				response.sendRedirect("/movieToday/profile?id=" + uid);
 			}
 		}
 
@@ -155,7 +155,7 @@ public class UserServlet extends HttpServlet {
 //		session.invalidate();
 		logOutFunction(session);
 		System.out.println("You are logged out");
-		response.sendRedirect("http://localhost:8080/movieToday/login.jsp");
+		response.sendRedirect("/movieToday/login.jsp");
 
 	}
 
@@ -205,7 +205,7 @@ public class UserServlet extends HttpServlet {
 		String phoneNumber = request.getParameter("phoneNumber");
 
 		if (updateFunction(username, password, email, phoneNumber, oriId) == true) {
-			response.sendRedirect("http://localhost:8080/movieToday/profile?id=" + oriId);
+			response.sendRedirect("/movieToday/profile?id=" + oriId);
 		}
 		// updateFunction(username, password, email, phoneNumber, oriId);
 		// Step 3: redirect back to UserServlet (note: remember to change the url to
@@ -230,7 +230,7 @@ public class UserServlet extends HttpServlet {
 			session.invalidate();
 
 			System.out.println("Account has been deleted");
-			response.sendRedirect("http://localhost:8080/movieToday/register.jsp");
+			response.sendRedirect("/movieToday/register.jsp");
 
 		}
 		// Step 3: redirect back to UserServlet dashboard (note: remember to change the
