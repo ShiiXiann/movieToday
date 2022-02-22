@@ -119,7 +119,7 @@ public class ReviewServlet extends HttpServlet {
 		// 3rd - to show in front end
 		if (i > 0) {
 			PrintWriter writer = response.getWriter();
-			response.sendRedirect("http://localhost:8080/movieToday/reviews");
+			response.sendRedirect("/movieToday/reviews");
 			writer.println("<h1>" + "You have successfully create a review" + "</h1>");
 			writer.close();
 
@@ -247,7 +247,7 @@ public class ReviewServlet extends HttpServlet {
 //			int i = statement.executeUpdate();
 //		}
 		if(UpdateReview(rid, mid, uid, review) == true) {
-			response.sendRedirect("http://localhost:8080/movieToday/reviews");
+			response.sendRedirect("/movieToday/reviews");
 		}
 		//UpdateReview(rid, mid, uid, review);
 
@@ -270,7 +270,7 @@ public class ReviewServlet extends HttpServlet {
 //		}
 
 		if (DeleteReview(rid) == true) {
-			response.sendRedirect("http://localhost:8080/movieToday/reviews");
+			response.sendRedirect("/movieToday/reviews");
 		}
 		
 		// Step 3: redirect back to UserServlet dashboard (note: remember to change the
@@ -330,8 +330,8 @@ public class ReviewServlet extends HttpServlet {
 
 			// perform the query on the database using the prepared statement
 			i = ps.executeUpdate();
-			// check if the query had been successfully execute, return “You are
-			// successfully registered” via the response,
+			// check if the query had been successfully execute, return ï¿½You are
+			// successfully registeredï¿½ via the response,
 			return i;
 
 		}
