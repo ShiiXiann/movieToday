@@ -196,7 +196,7 @@ public class FavouriteServlet extends HttpServlet {
 		}
 		// Step 3: redirect back to FavouriteServlet dashboard (note: remember to change
 		// the url to your project name)
-		response.sendRedirect("http://localhost:8080/movieToday/FavouriteServlet/displayJoinTable");
+		response.sendRedirect("/movieToday/FavouriteServlet/displayJoinTable");
 	}
 
 	/**
