@@ -7,7 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
-class ReviewTesting {
+class junitTest {
 	private ReviewServlet reviewServlet = new ReviewServlet(); 
 	private int rid;
 	private int movie_id;
