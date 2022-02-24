@@ -3,7 +3,9 @@
 <suite name="Suite">
   <test thread-count="5" name="Test">
     <classes>
-      <class name="movieToday.movieTest"/>
+      <class name=".seleniumMovieTest"/>
+      <class name=".CMovieTest"/>
+      <class name=".movieServletTest"/>
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->
