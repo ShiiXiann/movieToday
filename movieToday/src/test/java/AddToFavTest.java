@@ -1,8 +1,8 @@
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.AfterEach;
 
 public class AddToFavTest {
 	private MovieServlet movieServlet = new MovieServlet();
@@ -11,14 +11,14 @@ public class AddToFavTest {
 	private int uid;
 	
 
-	@Before
+	@BeforeEach
 	public void setUp() throws Exception {
 		
 		mid = 5;
 		uid = 3;
 	}
 
-	@After
+	@AfterEach
 	public void tearDown() throws Exception {
 	}
 
