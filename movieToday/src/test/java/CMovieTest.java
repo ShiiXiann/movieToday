@@ -18,7 +18,7 @@ class CMovieTest {
 
 	@BeforeEach
 	void setUp() throws Exception {
-		movieName = "john wick";
+		movieName = "john wack";
 		movieGenre = "action";
 		movieDescription = "Man kills enemies";
 		movieCasts = "Keanu Reeves";
