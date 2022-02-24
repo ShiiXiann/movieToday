@@ -18,7 +18,7 @@ public class UserTest {
 	@Test
 	public void aRegister() throws InterruptedException {
 		// navigate the browser to this URL
-		driver.get("http://localhost:8080/movieToday/register.jsp");
+		driver.get("http://localhost:8082/movieToday/register.jsp");
 
 		// fill up the register form
 		driver.findElement(By.name("username")).sendKeys("niklaus");
@@ -36,7 +36,7 @@ public class UserTest {
 	@Test
 	public void bLogin() throws InterruptedException {
 		// fill up login form
-		driver.get("http://localhost:8080/movieToday/login.jsp");
+		driver.get("http://localhost:8082/movieToday/login.jsp");
 		driver.findElement(By.name("username")).sendKeys("niklaus");
 		driver.findElement(By.name("password")).sendKeys("camille");
 
