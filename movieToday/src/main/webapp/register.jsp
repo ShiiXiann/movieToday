@@ -20,7 +20,7 @@
 		<div class="row h-100 justify-content-center align-items-center">
 			<div class="col-10 col-md-8 col-lg-6">
 				<h4 style="text-align: center; margin-top: 10px;">Register for
-					an account!!!</h4>
+					an account</h4>
 				<form action="RegisterServlet" method="post">
 
 					<!--  Username -->
