@@ -17,7 +17,7 @@
 <jsp:include page="navbar.jsp" />
 	<div class="row">
 		<div class="container">
-			<h3 class="text-center">Favourites List</h3>
+			<h3 class="text-center">Favourite List</h3>
 			
 			<!-- Create a table to list out all current favourite information -->
 			<table class="table">
